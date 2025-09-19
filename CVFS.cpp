@@ -20,6 +20,7 @@
 #include<unistd.h>
 #include<string.h>
 #include<stdbool.h>
+
 #include<iostream>
 
 using namespace std;
@@ -275,23 +276,23 @@ void StartAuxilaryDataInitialisation()
 
 void DisplayHelp()
 {
-    printf("---------------------------------------------------------\n");
-    printf("----------- Command Manual of Marvellous CVFS -----------\n");
-    printf("---------------------------------------------------------\n");
+    cout<<"---------------------------------------------------------\n";
+    cout<<"----------- Command Manual of Marvellous CVFS -----------\n";
+    cout<<"---------------------------------------------------------\n";
 
-    printf("man : It is used to display the specific manual page of command\n");
-    printf("exit : It is used to terminate the shell of Marvellous CVFS\n");
-    printf("clear : It is used to clear the console of Marvellous CVFS\n");
-    printf("creat : It is used to create new regular file\n");
-    printf("unlink : It is used to delete existing file\n");   
-    printf("stat : It is used to display statistical information about file\n");
-    printf("ls : It is used to list out all files from the directory\n");
-    printf("write : It is used to write the data into the file\n");
-    printf("read : It is used to read the data from the file\n");
+    cout<<"man : It is used to display the specific manual page of command\n";
+    cout<<"exit : It is used to terminate the shell of Marvellous CVFS\n";
+    cout<<"clear : It is used to clear the console of Marvellous CVFS\n";
+    cout<<"creat : It is used to create new regular file\n";
+    cout<<"unlink : It is used to delete existing file\n";   
+    cout<<"stat : It is used to display statistical information about file\n";
+    cout<<"ls : It is used to list out all files from the directory\n";
+    cout<<"write : It is used to write the data into the file\n";
+    cout<<"read : It is used to read the data from the file\n";
 
     // Add more options here
 
-    printf("---------------------------------------------------------\n");
+    cout<<"---------------------------------------------------------\n";
 }
 
 
@@ -312,58 +313,58 @@ void ManPage(
 {
     if(strcmp(name,"creat") == 0)
     {
-        printf("Description : This command is used to create new regular file on our file system\n");
+        cout<<"Description : This command is used to create new regular file on our file system\n";
 
-        printf("Usage : creat File_name Permissions\n");
-        printf("File_name : The name of file that you want to create\n");
-        printf("Permissions : \n1 : Read \n2 : Write \n3 : Read + Write\n");
+        cout<<"Usage : creat File_name Permissions\n";
+        cout<<"File_name : The name of file that you want to create\n";
+        cout<<"Permissions : \n1 : Read \n2 : Write \n3 : Read + Write\n";
     }
     else if(strcmp(name,"exit") == 0)
     {
-        printf("Description : This command is used to terminate the Marvellous CVFS\n");
+        cout<<"Description : This command is used to terminate the Marvellous CVFS\n";
 
-        printf("Usage : exit\n");     
+        cout<<"Usage : exit\n";     
     }
     else if(strcmp(name,"unlink") == 0)
     {
-        printf("Description : This command is used to delete regular file from our file system\n");
+        cout<<"Description : This command is used to delete regular file from our file system\n";
 
-        printf("Usage : unlink File_name\n");
-        printf("File_name : The name of file that you want to delete\n");
+        cout<<"Usage : unlink File_name\n";
+        cout<<"File_name : The name of file that you want to delete\n";
     }
     else if(strcmp(name,"stat") == 0)
     {
-        printf("Description : This command is used to display statistical information about the file\n");
+        cout<<"Description : This command is used to display statistical information about the file\n";
 
-        printf("Usage : stat File_name\n");
-        printf("File_name : The name of file whose information you want to display\n");
+        cout<<"Usage : stat File_name\n";
+        cout<<"File_name : The name of file whose information you want to display\n";
     }
     else if(strcmp(name,"ls") == 0)
     {
-        printf("Description : This command is used to list all file names form directory\n");
+        cout<<"Description : This command is used to list all file names form directory\n";
 
-        printf("Usage : ls\n");
+        cout<<"Usage : ls\n";
     }
     else if(strcmp(name,"write") == 0)
     {
-        printf("Description : This command is used to write the data into the file\n");
+        cout<<"Description : This command is used to write the data into the file\n";
 
-        printf("Usage : write File_Descriptor\n");
+        cout<<"Usage : write File_Descriptor\n";
     }
     else if(strcmp(name,"read") == 0)
     {
-        printf("Description : This command is used to read the data from the file\n");
+        cout<<"Description : This command is used to read the data from the file\n";
 
-        printf("Usage : read File_Descriptor Size\n");
+        cout<<"Usage : read File_Descriptor Size\n";
 
-        printf("File_Descriptor : Its a value returned by create system call\n");
-        printf("Size : Number of bytes that you eant to read\n");
+        cout<<"File_Descriptor : Its a value returned by create system call\n";
+        cout<<"Size : Number of bytes that you eant to read\n";
     }
     
     // Add more options here
     else
     {
-        printf("No manual entry for %s\n",name);
+        cout<<"No manual entry for %s\n",name;
     }
 }
 
@@ -420,7 +421,7 @@ int CreateFile(
     PINODE temp = head;
     int i = 0;
 
-    printf("Current Inodes remaining : %d\n",superobj.FreeInodes);
+    cout<<"Current Inodes remaining : %d\n",superobj.FreeInodes;
 
     // Filters
 
@@ -461,7 +462,7 @@ int CreateFile(
     // Inode not found
     if(temp == NULL)
     {
-        printf("Inode not found\n");
+        cout<<"Inode not found\n";
         return ERR_NO_INODES;
     }
 
@@ -476,7 +477,7 @@ int CreateFile(
 
     if(i == MAXINODE)
     {
-        printf("Unable to create file as MAX OPENED FILE LIMIT REACHED\n");
+        cout<<"Unable to create file as MAX OPENED FILE LIMIT REACHED\n";
         return -1;
     }
 
@@ -642,38 +643,38 @@ int stat_file(
     {
         if((strcmp(name,temp->FileName) == 0) && (temp->FileType != 0))
         {
-            printf("------------ Statistical Information of file -----------\n");
+            cout<<"------------ Statistical Information of file -----------\n";
             
-            printf("File name : %s\n",temp->FileName);
-            printf("File size on Disk : %d\n",temp->FileSize);
-            printf("Actual File size : %d\n",temp->ActualFileSize);
-            printf("Link count : %d\n",temp->LinkCount);
+            cout<<"File name : %s\n",temp->FileName;
+            cout<<"File size on Disk : %d\n",temp->FileSize;
+            cout<<"Actual File size : %d\n",temp->ActualFileSize;
+            cout<<"Link count : %d\n",temp->LinkCount;
             
-            printf("File permission : ");
+            cout<<"File permission : ";
             if(temp->Permission == READ)
             {
-                printf("Read\n");
+                cout<<"Read\n";
             }
             else if(temp->Permission == WRITE)
             {
-                printf("Write\n");
+                cout<<"Write\n";
             }
             else if(temp->Permission == READ + WRITE)
             {
-                printf("Read + Write\n");
+                cout<<"Read + Write\n";
             }
             
-            printf("File type : ");
+            cout<<"File type : ";
             if(temp->FileType == REGULARFILE)
             {
-                printf("Regular file\n");
+                cout<<"Regular file\n";
             }
             else if(temp->FileType == SPECIALFILE)
             {
-                printf("Special file\n");
+                cout<<"Special file\n";
             }
 
-            printf("--------------------------------------------------------\n");
+            cout<<"--------------------------------------------------------\n";
         }
 
         temp = temp -> next;
@@ -705,9 +706,9 @@ int write_file(
 {
     unsigned long int offset = 0;
 
-    printf("File descriptor is : %d\n",fd);
-    printf("Data that we want to write : %s\n",data);
-    printf("Number of bytes that we want to write : %d\n",size);
+    cout<<"File descriptor is : %d\n",fd;
+    cout<<"Data that we want to write : %s\n",data;
+    cout<<"Number of bytes that we want to write : %d\n",size;
 
     //Filters 
 
@@ -836,7 +837,7 @@ int main()
 
         strcpy(str,"");
 
-        printf("\nMarvellous CVFS > ");
+        cout<<"\nMarvellous CVFS > ";
         fgets(str,sizeof(str),stdin);
 
         iCount = sscanf(str,"%s %s %s %s",Command[0],Command[1], Command[2], Command[3]);
@@ -849,8 +850,8 @@ int main()
 
             if(strcmp(Command[0], "exit") == 0)
             {
-                printf("Thank you for using Marvellous CVFS\n");
-                printf("Deallocating all resources...\n");
+                cout<<"Thank you for using Marvellous CVFS\n";
+                cout<<"Deallocating all resources...\n";
 
                 break;
             }
@@ -881,8 +882,8 @@ int main()
 
             else
             {
-                printf("Coomand not found...\n");
-                printf("Please refer Help option or use man command\n");
+                cout<<"Coomand not found...\n";
+                cout<<"Please refer Help option or use man command\n";
             }
 
         }   // End of if iCount == 1
@@ -904,16 +905,16 @@ int main()
 
                 if(iRet == EXECUTE_SUCCESS)
                 {
-                    printf("Unlink Opertaion is succesfully performed\n");
+                    cout<<"Unlink Opertaion is succesfully performed\n";
                 }
                 else if(iRet == ERR_FILE_NOT_EXIST)
                 {
-                    printf("Error : Unable to do unlink activity as file is not present\n");
+                    cout<<"Error : Unable to do unlink activity as file is not present\n";
                 }
                 else if(iRet == ERR_INVALID_PARAMETER)
                 {
-                    printf("Error : Invalid parameters for the function\n");
-                    printf("Please check Man page for more details\n");
+                    cout<<"Error : Invalid parameters for the function\n";
+                    cout<<"Please check Man page for more details\n";
                 }
             }
 
@@ -925,12 +926,12 @@ int main()
 
                 if(iRet == ERR_FILE_NOT_EXIST)
                 {
-                    printf("Error : Unable to display statistics as file is not present\n");
+                    cout<<"Error : Unable to display statistics as file is not present\n";
                 }
                 else if(iRet == ERR_INVALID_PARAMETER)
                 {
-                    printf("Error : Invalid parameters for the function\n");
-                    printf("Please check Man page for more details\n");
+                    cout<<"Error : Invalid parameters for the function\n";
+                    cout<<"Please check Man page for more details\n";
                 }
             }
 
@@ -938,43 +939,43 @@ int main()
 
             else if(strcmp(Command[0], "write") == 0)
             {
-                printf("Please enter the data that you want to write into the file : \n");
+                cout<<"Please enter the data that you want to write into the file : \n";
                 fgets(InputBuffer,MAXFILESIZE,stdin);
                 
                 iRet = write_file(atoi(Command[1]), InputBuffer, strlen(InputBuffer)-1);
 
                 if(iRet == ERR_INSUFFICIENT_SPACE)
                 {
-                    printf("Error : Insufficient space in tha data block for the file\n");
+                    cout<<"Error : Insufficient space in tha data block for the file\n";
                 }
 
                 else if(iRet == ERR_PERMISSION_DENIED)
                 {
-                    printf("Error : Unable to write as there is no write permission\n");
+                    cout<<"Error : Unable to write as there is no write permission\n";
                 }
 
                 else if(iRet == ERR_INVALID_PARAMETER)
                 {
-                    printf("Error : Invalid parameters for the function\n");
-                    printf("Please check Man page for more details\n");
+                    cout<<"Error : Invalid parameters for the function\n";
+                    cout<<"Please check Man page for more details\n";
                 }
 
                 else if(iRet == ERR_FILE_NOT_EXIST)
                 {
-                    printf("Error : FD is invalid\n");
+                    cout<<"Error : FD is invalid\n";
                 }
 
                 else 
                 {
-                    printf("%d bytes gets succesfully written into the file\n",iRet);
-                    printf("Data from file is : %s\n",uareaobj.UFDT[0]->ptrinode->Buffer);
+                    cout<<"%d bytes gets succesfully written into the file\n",iRet;
+                    cout<<"Data from file is : %s\n",uareaobj.UFDT[0]->ptrinode->Buffer;
                 }
             }
 
             else
             {
-                printf("Coomand not found...\n");
-                printf("Please refer Help option or use man command\n");
+                cout<<"Coomand not found...\n";
+                cout<<"Please refer Help option or use man command\n";
             }
         }   // End of if iCount == 2
         
@@ -988,20 +989,20 @@ int main()
 
                 if(iRet == ERR_INVALID_PARAMETER)
                 {
-                    printf("Error : Invalid parameters for the function\n");
-                    printf("Please check Man page for more details\n");
+                    cout<<"Error : Invalid parameters for the function\n";
+                    cout<<"Please check Man page for more details\n";
                 }
                 else if(iRet == ERR_NO_INODES)
                 {
-                    printf("Error : Unable to create file as there is no Inodes\n");
+                    cout<<"Error : Unable to create file as there is no Inodes\n";
                 }
                 else if(iRet == ERR_FILE_ALREADY_EXIST)
                 {
-                    printf("Error : Unable to create file as file is already existing\n");
+                    cout<<"Error : Unable to create file as file is already existing\n";
                 }
                 else
                 {
-                    printf("File is succesfully created with FD : %d\n",iRet);
+                    cout<<"File is succesfully created with FD : %d\n",iRet;
                 }
 
             }
@@ -1016,29 +1017,29 @@ int main()
 
                 if(iRet == ERR_INSUFFICIENT_DATA)
                 {
-                    printf("Error : Insufficient data in tha data block of the file\n");
+                    cout<<"Error : Insufficient data in tha data block of the file\n";
                 }
 
                 else if(iRet == ERR_PERMISSION_DENIED)
                 {
-                    printf("Error : Unable to redad as there is no read permission\n");
+                    cout<<"Error : Unable to redad as there is no read permission\n";
                 }
 
                 else if(iRet == ERR_INVALID_PARAMETER)
                 {
-                    printf("Error : Invalid parameters for the function\n");
-                    printf("Please check Man page for more details\n");
+                    cout<<"Error : Invalid parameters for the function\n";
+                    cout<<"Please check Man page for more details\n";
                 }
 
                 else if(iRet == ERR_FILE_NOT_EXIST)
                 {
-                    printf("Error : FD is invalid\n");
+                    cout<<"Error : FD is invalid\n";
                 }
 
                 else
                 {
-                    printf("Read operation is successfull\n");
-                    printf("Data from file is : %s\n",EmptyBuffer);
+                    cout<<"Read operation is successfull\n";
+                    cout<<"Data from file is : %s\n",EmptyBuffer;
 
                     free(EmptyBuffer);
                 }
@@ -1046,8 +1047,8 @@ int main()
 
             else
             {
-                printf("Coomand not found...\n");
-                printf("Please refer Help option or use man command\n");
+                cout<<"Coomand not found...\n";
+                cout<<"Please refer Help option or use man command\n";
             }
         }   // End of if iCount == 3
         
@@ -1058,8 +1059,8 @@ int main()
         
         else
         {
-            printf("Coomand not found...\n");
-            printf("Please refer Help option or use man command\n");
+            cout<<"Coomand not found...\n";
+            cout<<"Please refer Help option or use man command\n";
         }   // End of invalid command part
 
     }   // End of while (Custom Shell)
